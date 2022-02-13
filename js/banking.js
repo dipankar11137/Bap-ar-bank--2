@@ -1,26 +1,47 @@
 
 // function
-function getInputValue() {
-    const depositInput = document.getElementById('deposit-input');
-    const depositInputText = depositInput.value;
-    const depositInputAmount = parseFloat(depositInputText);
+function getInputValue(inputValue) {
+    const inputField = document.getElementById(inputValue);
+    const inputAmountText = inputField.value;
+    const amountValue = parseFloat(inputAmountText);
 
     // set empty value 
-    depositInput.value = '';
+    inputField.value = '';
 
-    return depositInputAmount;
+    return amountValue;
+}
+
+function updateTotalField(totalFieldId, inputAmount) {
+    const totalBalance = document.getElementById(totalFieldId);
+    const preTotalBalanceText = totalBalance.innerText;
+    const preTotalBalanceAmount = parseFloat(preTotalBalanceText);
+
+    // update total balance 
+    totalBalance.innerText = preTotalBalanceAmount + inputAmount;
+
+
+}
+
+function updateBalance(depositInputAmount) {
+    const totalBalance = document.getElementById('balance-total');
+    const preTotalBalanceText = totalBalance.innerText;
+    const preTotalBalanceAmount = parseFloat(preTotalBalanceText);
+
+    // update total balance 
+    const updateTotalBalance = preTotalBalanceAmount + depositInputAmount;
+    totalBalance.innerText = updateTotalBalance;
 }
 
 
-
-
 document.getElementById('diposit-button').addEventListener('click', function () {
-    // get deposit value 
-    /* const depositInput = document.getElementById('deposit-input');
+    // get deposit value (Function a chola gaca) 
+    /* 
+    const depositInput = document.getElementById('deposit-input');
     const depositInputText = depositInput.value;
-    const depositInputAmount = parseFloat(depositInputText); */
+    const depositInputAmount = parseFloat(depositInputText); 
+    */
 
-    const depositInputAmount = getInputValue();
+    const depositInputAmount = getInputValue('deposit-input');
 
     // total deposit  
     const pretotalDeposit = document.getElementById('deposit-total');
@@ -33,35 +54,42 @@ document.getElementById('diposit-button').addEventListener('click', function () 
     // set deposit in total value
     pretotalDeposit.innerText = updateTotalDeposit;
 
+    updateTotalField('deposit-total', pretotalDepositAmount);
+
+
     // get total balance 
-    const totalBalance = document.getElementById('balance-total');
-    const preTotalBalanceText = totalBalance.innerText;
-    const preTotalBalanceAmount = parseFloat(preTotalBalanceText);
+    /*    const totalBalance = document.getElementById('balance-total');
+       const preTotalBalanceText = totalBalance.innerText;
+       const preTotalBalanceAmount = parseFloat(preTotalBalanceText);
+   
+       // update total balance 
+       const updateTotalBalance = preTotalBalanceAmount + inputWithdrowAmount;
+       totalBalance.innerText = updateTotalBalance; */
 
-    // update total balance 
-    const updateTotalBalance = depositInputAmount + preTotalBalanceAmount;
-    totalBalance.innerText = updateTotalBalance;
-
-
+    updateBalance(depositInputAmount);
 
 });
 
 // deposit button
 document.getElementById('withdraw-button').addEventListener('click', function () {
-    // withdrow input
+    // withdrow input (Function a chola gaca) 
+    /*  
     const inputWithdrow = document.getElementById('withdraw-input');
-    const inputWithdrowText = inputWithdrow.value;
-    const inputWithdrowAmount = parseFloat(inputWithdrowText);
+     const inputWithdrowText = inputWithdrow.value;
+     const inputWithdrowAmount = parseFloat(inputWithdrowText); 
+     */
+
+    const inputWithdrowAmount = getInputValue('withdraw-input');
 
     // total withdrow input
-    const preTotalWithdrow = document.getElementById('withdraw-total');
-    const preTotalWithdrowText = preTotalWithdrow.innerText;
-    const preTotalWithdrowAmonunt = parseFloat(preTotalWithdrowText);
-
-    // update withdrow 
+    /*  const preTotalWithdrow = document.getElementById('withdraw-total');
+     const preTotalWithdrowText = preTotalWithdrow.innerText;
+     const preTotalWithdrowAmonunt = parseFloat(preTotalWithdrowText);    
+    update withdrow 
     const updateTotalAmount = inputWithdrowAmount + preTotalWithdrowAmonunt;
-    preTotalWithdrow.innerText = updateTotalAmount;
+    preTotalWithdrow.innerText = updateTotalAmount; */
 
+    updateTotalField('withdraw-total', inputWithdrowAmount);
     // get total balance 
     const totalBalance = document.getElementById('balance-total');
     const preTotalBalanceText = totalBalance.innerText;
@@ -71,7 +99,6 @@ document.getElementById('withdraw-button').addEventListener('click', function ()
     const updateTotalBalance = preTotalBalanceAmount - inputWithdrowAmount;
     totalBalance.innerText = updateTotalBalance;
 
-    // clear output
-    inputWithdrow.value = '';
+
 
 });
